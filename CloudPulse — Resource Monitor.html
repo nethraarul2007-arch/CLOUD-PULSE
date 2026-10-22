@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>CloudPulse — Resource Monitor</title>
+  <link rel="stylesheet" href="./CloudPulse — Resource Monitor_files/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="http://localhost:3000/" aria-label="CloudPulse home"><span class="brand-mark">✦</span><span>CloudPulse<small>OBSERVABILITY</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav-item active" href="http://localhost:3000/#overview"><span>▦</span> Overview</a>
+      <a class="nav-item" href="http://localhost:3000/#services"><span>◉</span> Services <span class="nav-count">4</span></a>
+      <a class="nav-item" href="http://localhost:3000/#alerts"><span>♢</span> Alerts <span id="nav-alert-count" class="nav-count">1</span></a>
+      <a class="nav-item" href="http://localhost:3000/#logs"><span>≡</span> Event logs</a>
+      <div class="sidebar-bottom"><div class="profile-dot">CP</div><div><b>Demo workspace</b><small>Local environment</small></div><span class="online-dot"></span></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><div class="eyebrow">MONITORING / OVERVIEW</div><h1>Cloud overview</h1><p class="subheading">A live view of your cloud environment.</p></div><div class="top-actions"><span class="demo-badge"><span></span> SIMULATED DATA</span><button id="refresh-btn" class="button secondary">↻ Refresh</button></div></header>
+      <div id="notice" class="notice" role="status">Demo mode: CPU, memory, disk and service telemetry are simulated. Hostname/platform details are read locally by Node.js; no cloud provider is connected.</div>
+      <section id="overview" class="metric-grid">
+        <article class="metric-card"><div class="metric-top"><span>CPU UTILIZATION</span><span class="metric-icon purple">⌁</span></div><div class="metric-value"><strong id="cpu-value">61</strong><span>%</span></div><div class="meter"><span id="cpu-meter" style="width: 61%;"></span></div><div class="metric-foot"><span id="cpu-caption">Below 80% threshold</span><span class="trend">● Live demo</span></div></article>
+        <article class="metric-card"><div class="metric-top"><span>MEMORY USAGE</span><span class="metric-icon blue">▤</span></div><div class="metric-value"><strong id="memory-value">65</strong><span>%</span></div><div class="meter"><span id="memory-meter" style="width: 65%;"></span></div><div class="metric-foot"><span>Threshold: 85%</span><span id="memory-caption">Below 85% threshold</span></div></article>
+        <article class="metric-card"><div class="metric-top"><span>DISK UTILIZATION</span><span class="metric-icon orange">▥</span></div><div class="metric-value"><strong id="disk-value">49</strong><span>%</span></div><div class="meter"><span id="disk-meter" style="width: 49%;"></span></div><div class="metric-foot"><span>Demo capacity indicator</span><span class="neutral">Nominal</span></div></article>
+        <article class="metric-card"><div class="metric-top"><span>HEALTHY SERVICES</span><span class="metric-icon green">✓</span></div><div class="metric-value"><strong id="healthy-value">3</strong><span class="metric-unit">/ 4</span></div><div class="metric-foot service-foot"><span>Service check results</span><span id="health-status" class="status-pill" style="color: var(--orange); background: rgb(73, 58, 43);">Attention</span></div></article>
+      </section>
+      <section class="chart-grid">
+        <article class="panel chart-panel"><div class="panel-heading"><div><h2>Resource utilization</h2><p>Recent CPU and memory samples</p></div><span class="live-label"><i></i> UPDATING</span></div><div class="chart-legend"><span><i class="legend-cpu"></i> CPU</span><span><i class="legend-memory"></i> Memory</span><span class="chart-unit">Usage (%)</span></div><div class="chart-wrap"><canvas id="usage-chart" aria-label="CPU and memory usage line chart" role="img" width="815" height="332"></canvas></div><div class="chart-footer"><span>Rolling demo window · last 12 samples</span><span id="last-updated">Updated 03:45:50 pm</span></div></article>
+        <article id="alerts" class="panel alert-panel"><div class="panel-heading"><div><h2>Active alerts</h2><p>Threshold-based notifications</p></div><span id="alert-total" class="count-chip">1</span></div><div id="alert-list" class="alert-list"><div class="alert-item warning"><div class="alert-symbol">△</div><div><b>Service degraded</b><p>Worker Queue latency is above its normal range</p><small>WARNING · just now</small></div></div></div><div class="threshold-box"><b>Alert thresholds</b><div><span>CPU usage</span><strong>≥ 80%</strong></div><div><span>Memory usage</span><strong>≥ 85%</strong></div></div></article>
+      </section>
+      <section id="services" class="panel services-panel"><div class="panel-heading"><div><h2>Service health</h2><p>Latest simulated health-check results</p></div><span class="subtle">Region: ap-south-1</span></div><div class="table-scroll"><table><thead><tr><th>SERVICE</th><th>REGION</th><th>STATUS</th><th>LATENCY</th><th>LAST CHECK</th></tr></thead><tbody id="service-rows"><tr><td><span class="service-name"><i class="service-dot "></i>API Gateway</span></td><td>ap-south-1</td><td><span class="service-status ">● Healthy</span></td><td>42 ms</td><td>03:45:50 pm</td></tr><tr><td><span class="service-name"><i class="service-dot "></i>Auth Service</span></td><td>ap-south-1</td><td><span class="service-status ">● Healthy</span></td><td>68 ms</td><td>03:45:50 pm</td></tr><tr><td><span class="service-name"><i class="service-dot degraded"></i>Worker Queue</span></td><td>ap-south-1</td><td><span class="service-status degraded">● Degraded</span></td><td>184 ms</td><td>03:45:50 pm</td></tr><tr><td><span class="service-name"><i class="service-dot "></i>Database</span></td><td>ap-south-1</td><td><span class="service-status ">● Healthy</span></td><td>31 ms</td><td>03:45:50 pm</td></tr></tbody></table></div></section>
+      <section id="logs" class="panel logs-panel"><div class="panel-heading"><div><h2>Recent event logs</h2><p>System events and demo activity</p></div><button id="add-log-btn" class="button secondary small">＋ Add demo event</button></div><div id="log-list" class="log-list"><div class="log-row"><span class="log-time">03:44:29 pm</span><span class="log-level INFO">INFO</span><span class="log-service">api-gateway</span><span class="log-message">Health check passed</span></div><div class="log-row"><span class="log-time">03:44:29 pm</span><span class="log-level WARN">WARN</span><span class="log-service">worker-queue</span><span class="log-message">Queue processing latency is elevated (simulated event)</span></div><div class="log-row"><span class="log-time">03:44:29 pm</span><span class="log-level INFO">INFO</span><span class="log-service">system</span><span class="log-message">CloudPulse monitoring service initialized</span></div></div></section>
+      <footer><span>CloudPulse <b>v1.0.0</b> · Built with Node.js built-in modules</span><span>Metrics are simulated · Not connected to a cloud provider</span></footer>
+    </main>
+  </div>
+  <script src="./CloudPulse — Resource Monitor_files/app.js.download"></script>
+
+
+</body></html>
